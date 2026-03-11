@@ -32,21 +32,21 @@ ALLOWED_HOSTS = []
 
 
 
+
 INSTALLED_APPS = [
 
-'django.contrib.admin',
-'django.contrib.auth',
-'django.contrib.contenttypes',
-'django.contrib.sessions',
-'django.contrib.messages',
-'django.contrib.staticfiles',
+    'django.contrib.admin',
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
 
-'accounts',
-'dashboard',
-'students',
-'teachers',
-'questionbank',
-
+    'accounts',
+    'students',
+    'teachers',
+    'dashboard',
+    'questionbank',   # 👈 ADD THIS
 ]
 AUTH_USER_MODEL = 'accounts.User'
 
