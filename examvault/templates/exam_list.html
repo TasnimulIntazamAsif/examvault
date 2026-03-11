@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h2>Available Exams</h2>
+
+<div class="exam-container">
+
+{% for exam in exams %}
+
+<div class="exam-card">
+
+<h3>{{exam.title}}</h3>
+
+<p>Questions: {{exam.total_questions}}</p>
+
+<a href="/exam/start/{{exam.id}}/" class="btn">Start Exam</a>
+
+</div>
+
+{% endfor %}
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h2>Teacher Exam Dashboard</h2>
+
+<table border="1">
+
+<tr>
+<th>Exam Title</th>
+<th>Total Questions</th>
+<th>Start</th>
+</tr>
+
+{% for exam in exams %}
+
+<tr>
+<td>{{exam.title}}</td>
+<td>{{exam.total_questions}}</td>
+<td>
+<a href="/exam/start/{{exam.id}}/">Preview</a>
+</td>
+</tr>
+
+{% endfor %}
+
+</table>
+
+{% endblock %}
