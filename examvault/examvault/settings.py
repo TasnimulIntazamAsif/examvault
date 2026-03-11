@@ -46,8 +46,10 @@ INSTALLED_APPS = [
     'students',
     'teachers',
     'dashboard',
-    'questionbank',   # 👈 ADD THIS
+    'questionbank',
+    'exam',# 👈 ADD THIS
 ]
+
 AUTH_USER_MODEL = 'accounts.User'
 
 MIDDLEWARE = [

@@ -22,7 +22,7 @@ from django.urls import path
 #]
 
 from django.contrib import admin
-from django.urls import path
+from django.urls import path,include
 from accounts import views as acc_views
 from dashboard import views as dash_views
 
@@ -49,6 +49,12 @@ urlpatterns = [
     path('question-banks/',student_views.question_banks,name="question_banks"),
 
     path('add-question/',teacher_views.add_question,name="add_question"),
+    path('exam/', include('exam.urls')),
+    #path('start/<int:exam_id>/', views.start_exam, name='start_exam'),
+
+    #path('submit/<int:attempt_id>/', views.submit_exam, name='submit_exam'),
+
+    #path('result/<int:attempt_id>/', views.exam_result, name='exam_result'),
 
 
 ]
