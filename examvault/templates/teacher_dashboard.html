@@ -1,0 +1,24 @@
+<h1>Teacher Dashboard</h1>
+
+<a href="/logout/">Logout</a>
+
+<p>Welcome Teacher</p>
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h2>Teacher Dashboard</h2>
+
+<div class="card">
+
+<a href="/add-question/">
+<button>Add Question</button>
+</a>
+
+<a href="/upload-csv/">
+<button>Upload CSV</button>
+</a>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h2>Add Question</h2>
+
+<div class="card">
+
+<form method="POST">
+
+{% csrf_token %}
+
+<label>Question Bank</label>
+
+<select name="bank">
+
+{% for bank in banks %}
+<option value="{{bank.id}}">{{bank.title}}</option>
+{% endfor %}
+
+</select>
+
+<label>Question</label>
+
+<textarea name="question"></textarea>
+
+<input name="a" placeholder="Option A">
+<input name="b" placeholder="Option B">
+<input name="c" placeholder="Option C">
+<input name="d" placeholder="Option D">
+
+<input name="correct" placeholder="Correct Option (A/B/C/D)">
+
+<textarea name="explanation" placeholder="Explanation"></textarea>
+
+<button type="submit">Save Question</button>
+
+</form>
+
+</div>
+
+{% endblock %}

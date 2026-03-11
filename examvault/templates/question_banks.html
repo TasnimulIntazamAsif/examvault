@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h2>Question Banks</h2>
+
+{% for bank in banks %}
+
+<div class="card">
+
+<h3>{{bank.title}}</h3>
+
+<p>Subject : {{bank.subject}}</p>
+
+<p>Year : {{bank.year}}</p>
+
+{% if bank.is_premium %}
+
+<p>Premium | Price {{bank.price}}</p>
+
+{% else %}
+
+<p>Free</p>
+
+{% endif %}
+
+</div>
+
+{% endfor %}
+
+{% endblock %}
