@@ -1,17 +1,29 @@
-<h1>Student Dashboard</h1>
-
-<a href="/logout/">Logout</a>
-
-<p>Welcome Student</p>
-{% extends 'base.html' %}
+{% extends "base.html" %}
 
 {% block content %}
 
 <h2>Student Dashboard</h2>
-<a href="/exam/">Take Exam</a>
+
+<div class="card-grid">
+
 <div class="card">
-<p>Welcome Student</p>
-<p>You can browse question banks and take exams.</p>
+<h3>Available Exams</h3>
+<p>Start your mock tests</p>
+<a href="/exam/" class="btn">View Exams</a>
+</div>
+
+<div class="card">
+<h3>Question Banks</h3>
+<p>Browse subject questions</p>
+<a href="/questionbank/" class="btn">Open</a>
+</div>
+
+<div class="card">
+<h3>Exam History</h3>
+<p>Check previous attempts</p>
+<a href="#" class="btn">View</a>
+</div>
+
 </div>
 
 {% endblock %}

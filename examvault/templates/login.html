@@ -1,14 +1,51 @@
-<h2>Login</h2>
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<meta charset="UTF-8">
+<title>ExamVault Login</title>
+
+<link rel="stylesheet" href="{% static 'css/auth.css' %}">
+
+</head>
+
+<body>
+
+<div class="auth-container">
+
+<div class="auth-card">
+
+<h2>Login to ExamVault</h2>
 
 <form method="POST">
-    {% csrf_token %}
 
-    <input type="text" name="username" placeholder="Username"><br><br>
+{% csrf_token %}
 
-    <input type="password" name="password" placeholder="Password"><br><br>
+<div class="form-group">
+<label>Username</label>
+<input type="text" name="username" required>
+</div>
 
-    <button type="submit">Login</button>
+<div class="form-group">
+<label>Password</label>
+<input type="password" name="password" required>
+</div>
+
+<button class="auth-btn">Login</button>
+
+<p class="auth-link">
+Don't have an account?
+<a href="/register/">Register here</a>
+</p>
 
 </form>
 
-<a href="/register/">Register</a>
+</div>
+
+</div>
+
+</body>
+</html>

@@ -2,38 +2,17 @@
 
 {% block content %}
 
+<div class="result-card">
+
 <h2>Exam Result</h2>
 
-<div class="card">
-
 <p>Total Questions: {{attempt.total_questions}}</p>
-
 <p>Correct: {{attempt.correct}}</p>
-
 <p>Wrong: {{attempt.wrong}}</p>
-
 <p>Unanswered: {{attempt.unanswered}}</p>
 
-<p>Score: {{attempt.score}}</p>
+<h3>Your Score: {{attempt.score}}</h3>
 
 </div>
-
-<h3>Answer Review</h3>
-
-{% for a in answers %}
-
-<div class="card">
-
-<p>{{forloop.counter}}. {{a.question.question_text}}</p>
-
-<p>Your Answer: {{a.selected_option}}</p>
-
-<p>Correct Answer: {{a.question.correct_option}}</p>
-
-<p>{{a.question.explanation}}</p>
-
-</div>
-
-{% endfor %}
 
 {% endblock %}
