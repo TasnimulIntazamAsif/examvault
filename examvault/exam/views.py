@@ -1,10 +1,11 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from .models import Exam, ExamAttempt, Answer
-from questionbank.models import Question
-
 from django.contrib.auth.decorators import login_required
+from .models import Exam, ExamAttempt, Answer
 
 
+# ========================
+# EXAM LIST (IMPORTANT)
+# ========================
 @login_required
 def exam_list(request):
 
@@ -14,18 +15,25 @@ def exam_list(request):
         "exams": exams
     })
 
-# Start Exam
+
+# ========================
+# START EXAM
+# ========================
+@login_required
 def start_exam(request, exam_id):
 
     exam = get_object_or_404(Exam, id=exam_id)
 
-    questions = Question.objects.filter(bank=exam.question_bank)[:exam.total_questions]
+    # 🔥 Use admin selected questions
+    questions = exam.questions.all()
 
     attempt = ExamAttempt.objects.create(
         student=request.user,
         exam=exam,
-        total_questions=len(questions)
+        total_questions=questions.count()
     )
+
+    attempt.questions.set(questions)
 
     return render(request, "exam_page.html", {
         "exam": exam,
@@ -34,12 +42,15 @@ def start_exam(request, exam_id):
     })
 
 
-# Submit Exam
+# ========================
+# SUBMIT EXAM
+# ========================
+@login_required
 def submit_exam(request, attempt_id):
 
     attempt = get_object_or_404(ExamAttempt, id=attempt_id)
 
-    questions = Question.objects.filter(bank=attempt.exam.question_bank)[:attempt.total_questions]
+    questions = attempt.questions.all()
 
     correct = 0
     wrong = 0
@@ -77,7 +88,10 @@ def submit_exam(request, attempt_id):
     return redirect("exam_result", attempt_id=attempt.id)
 
 
-# Exam Result
+# ========================
+# RESULT
+# ========================
+@login_required
 def exam_result(request, attempt_id):
 
     attempt = get_object_or_404(ExamAttempt, id=attempt_id)
@@ -87,12 +101,4 @@ def exam_result(request, attempt_id):
     return render(request, "exam_result.html", {
         "attempt": attempt,
         "answers": answers
-    })
-# Teacher Exam Dashboard
-def teacher_exam_list(request):
-
-    exams = Exam.objects.all()
-
-    return render(request, "teacher_exam_list.html", {
-        "exams": exams
     })

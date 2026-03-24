@@ -1,0 +1,92 @@
+/* PAGE TITLE */
+
+h2{
+    text-align:center;
+    margin-bottom:20px;
+    color:#333;
+}
+
+/* CARD */
+
+.card{
+    width:500px;
+    margin:30px auto;
+    padding:30px;
+    background:#ffffff;
+    border-radius:12px;
+    box-shadow:0 10px 30px rgba(0,0,0,0.1);
+    animation:fadeIn 0.4s ease;
+}
+
+@keyframes fadeIn{
+    from{opacity:0; transform:translateY(20px);}
+    to{opacity:1; transform:translateY(0);}
+}
+
+/* LABEL */
+
+.card label{
+    display:block;
+    margin-top:15px;
+    font-weight:600;
+    color:#555;
+}
+
+/* INPUT + SELECT + TEXTAREA */
+
+.card input,
+.card select,
+.card textarea{
+    width:100%;
+    padding:10px;
+    margin-top:6px;
+    border:1px solid #ddd;
+    border-radius:6px;
+    outline:none;
+    transition:0.3s;
+    font-size:14px;
+}
+
+/* FOCUS EFFECT */
+
+.card input:focus,
+.card select:focus,
+.card textarea:focus{
+    border-color:#667eea;
+    box-shadow:0 0 6px rgba(102,126,234,0.3);
+}
+
+/* TEXTAREA HEIGHT */
+
+.card textarea{
+    min-height:80px;
+    resize:vertical;
+}
+
+/* BUTTON */
+
+.card button{
+    width:100%;
+    padding:12px;
+    margin-top:20px;
+    background:#667eea;
+    color:white;
+    border:none;
+    border-radius:6px;
+    font-size:16px;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+/* BUTTON HOVER */
+
+.card button:hover{
+    background:#5a67d8;
+}
+
+/* PLACEHOLDER STYLE */
+
+.card input::placeholder,
+.card textarea::placeholder{
+    color:#aaa;
+}

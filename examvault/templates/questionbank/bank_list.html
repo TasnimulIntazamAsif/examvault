@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h2>Question Banks</h2>
+
+{% for bank in banks %}
+
+<div class="card">
+<h3>{{bank.title}}</h3>
+
+<a href="/questionbank/bank/{{bank.id}}/" class="btn">View Questions</a>
+</div>
+
+{% endfor %}
+
+{% endblock %}

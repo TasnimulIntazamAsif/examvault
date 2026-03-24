@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="card">
+
+<h2>Upload CSV Questions</h2>
+
+{% if messages %}
+  {% for message in messages %}
+    <p style="color:red;">{{ message }}</p>
+  {% endfor %}
+{% endif %}
+
+<form method="POST" enctype="multipart/form-data">
+
+{% csrf_token %}
+
+<label>Select Question Bank</label>
+
+<select name="bank" required>
+{% for bank in banks %}
+<option value="{{bank.id}}">{{bank.title}}</option>
+{% endfor %}
+</select>
+
+<br><br>
+
+<input type="file" name="file" required>
+
+<br><br>
+
+<button class="btn">Upload</button>
+
+</form>
+
+</div>
+
+{% endblock %}

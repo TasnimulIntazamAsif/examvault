@@ -50,6 +50,8 @@ urlpatterns = [
 
     path('add-question/',teacher_views.add_question,name="add_question"),
     path('exam/', include('exam.urls')),
+    path('questionbank/', include('questionbank.urls')),
+
     #path('start/<int:exam_id>/', views.start_exam, name='start_exam'),
 
     #path('submit/<int:attempt_id>/', views.submit_exam, name='submit_exam'),

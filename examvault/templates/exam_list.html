@@ -4,22 +4,20 @@
 
 <h2>Available Exams</h2>
 
-<div class="exam-container">
-
 {% for exam in exams %}
 
 <div class="exam-card">
 
-<h3>{{exam.title}}</h3>
+    <h3>{{ exam.title }}</h3>
+    <p>Total Questions: {{ exam.total_questions }}</p>
 
-<p>Questions: {{exam.total_questions}}</p>
-
-<a href="/exam/start/{{exam.id}}/" class="btn">Start Exam</a>
+    <!-- 🔥 FINAL WORKING BUTTON -->
+    <form action="/exam/start/{{ exam.id }}/" method="GET">
+        <button type="submit" class="start-btn">Start Exam</button>
+    </form>
 
 </div>
 
 {% endfor %}
-
-</div>
 
 {% endblock %}
