@@ -4,26 +4,38 @@
 
 <h2>Teacher Exam Dashboard</h2>
 
-<table border="1">
+<!-- ✅ Create Exam Button -->
+<a href="{% url 'create_exam' %}" style="display:inline-block; margin-bottom:15px;">
+    ➕ Create New Exam
+</a>
 
-<tr>
-<th>Exam Title</th>
-<th>Total Questions</th>
-<th>Start</th>
-</tr>
+<table border="1" cellpadding="10" cellspacing="0" width="100%">
+    <tr>
+        <th>Exam Title</th>
+        <th>Total Questions</th>
+        <th>Action</th>
+    </tr>
 
-{% for exam in exams %}
+    {% for exam in exams %}
+    <tr>
+        <td>{{ exam.title }}</td>
 
-<tr>
-<td>{{exam.title}}</td>
-<td>{{exam.total_questions}}</td>
-<td>
-<a href="/exam/start/{{exam.id}}/">Preview</a>
-</td>
-</tr>
+        <!-- ✅ Safe count -->
+        <td>{{ exam.questions.count }}</td>
 
-{% endfor %}
+        <td>
+            <!-- Preview -->
+            <a href="{% url 'start_exam' exam.id %}">▶ Preview</a>
+        </td>
+    </tr>
 
+    {% empty %}
+    <tr>
+        <td colspan="3" style="text-align:center;">
+            No exams created yet ❌
+        </td>
+    </tr>
+    {% endfor %}
 </table>
 
 {% endblock %}

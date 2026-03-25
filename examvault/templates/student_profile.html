@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h2>Student Profile</h2>
+
+<form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+
+    <!-- FULL NAME -->
+    <input type="text" name="name" placeholder="Full Name" value="{{ profile.full_name }}"><br><br>
+
+    <!-- PHONE -->
+    <input type="text" name="phone" placeholder="Phone" value="{{ profile.phone }}"><br><br>
+
+    <!-- INSTITUTION -->
+    <input type="text" name="institution" placeholder="Institution" value="{{ profile.institution }}"><br><br>
+
+    <!-- CLASS -->
+    <input type="text" name="class" placeholder="Class" value="{{ profile.class_name }}"><br><br>
+
+    <!-- DOB -->
+    <input type="date" name="dob" value="{{ profile.date_of_birth|date:'Y-m-d' }}"><br><br>
+
+    <!-- IMAGE PREVIEW -->
+    {% if profile.image %}
+        <p>Current Image:</p>
+        <img src="{{ profile.image.url }}" width="120"><br><br>
+    {% endif %}
+
+    <input type="file" name="image"><br><br>
+
+    <!-- ID CARD -->
+    {% if profile.id_card %}
+        <p>Uploaded ID: <a href="{{ profile.id_card.url }}" target="_blank">View</a></p>
+    {% endif %}
+
+    <input type="file" name="id_card"><br><br>
+
+    <button type="submit">Save</button>
+</form>
+
+{% endblock %}

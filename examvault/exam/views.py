@@ -4,7 +4,7 @@ from .models import Exam, ExamAttempt, Answer
 
 
 # ========================
-# EXAM LIST (IMPORTANT)
+# EXAM LIST
 # ========================
 @login_required
 def exam_list(request):
@@ -24,7 +24,6 @@ def start_exam(request, exam_id):
 
     exam = get_object_or_404(Exam, id=exam_id)
 
-    # 🔥 Use admin selected questions
     questions = exam.questions.all()
 
     attempt = ExamAttempt.objects.create(
@@ -101,4 +100,17 @@ def exam_result(request, attempt_id):
     return render(request, "exam_result.html", {
         "attempt": attempt,
         "answers": answers
+    })
+
+
+# ========================
+# ✅ FIXED: TEACHER EXAM LIST
+# ========================
+@login_required
+def teacher_exam_list(request):
+
+    exams = Exam.objects.all()
+
+    return render(request, "teacher_exam_list.html", {
+        "exams": exams
     })

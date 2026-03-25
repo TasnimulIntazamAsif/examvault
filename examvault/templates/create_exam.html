@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h2>Create Exam</h2>
+
+<form method="POST">
+    {% csrf_token %}
+
+    <input type="text" name="title" placeholder="Exam Title" required>
+
+    <h3>Select Questions</h3>
+
+    {% for q in questions %}
+        <div>
+            <input type="checkbox" name="questions" value="{{ q.id }}">
+            {{ q.question_text }}
+        </div>
+    {% endfor %}
+
+    <button type="submit">Create Exam</button>
+</form>
+
+{% endblock %}

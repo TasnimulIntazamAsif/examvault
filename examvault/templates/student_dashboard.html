@@ -4,25 +4,67 @@
 
 <h2>Student Dashboard</h2>
 
+<a href="{% url 'logout' %}">Logout</a> |
+<a href="{% url 'student_profile' %}">👤 Edit Profile</a>
+
+<hr>
+
+<!-- 🔥 PROFILE SECTION -->
+<h3>My Profile</h3>
+
+{% if profile %}
+    <div style="border:1px solid #ccc; padding:15px; width:300px; border-radius:10px;">
+
+        {% if profile.image %}
+            <img src="{{ profile.image.url }}" width="120" style="border-radius:50%;"><br><br>
+        {% endif %}
+
+        <p><b>Name:</b> {{ profile.full_name }}</p>
+        <p><b>Phone:</b> {{ profile.phone }}</p>
+        <p><b>Institution:</b> {{ profile.institution }}</p>
+        <p><b>Class:</b> {{ profile.class_name }}</p>
+
+        {% if profile.id_card %}
+            <p><a href="{{ profile.id_card.url }}" target="_blank">📄 View ID Card</a></p>
+        {% endif %}
+
+    </div>
+{% else %}
+    <p style="color:red;">No profile added yet</p>
+{% endif %}
+
+<hr>
+
+<!-- 🔥 MAIN DASHBOARD CARDS -->
 <div class="card-grid">
 
-<div class="card">
-<h3>Available Exams</h3>
-<p>Start your mock tests</p>
-<a href="/exam/" class="btn">View Exams</a>
-</div>
+    <!-- Exams -->
+    <div class="card">
+        <h3>Available Exams</h3>
+        <p>Start your mock tests</p>
+        <a href="{% url 'exam_list' %}" class="btn">View Exams</a>
+    </div>
 
-<div class="card">
-<h3>Question Banks</h3>
-<p>Browse subject questions</p>
-<a href="/questionbank/" class="btn">Open</a>
-</div>
+    <!-- Question Bank -->
+    <div class="card">
+        <h3>Question Banks</h3>
+        <p>Browse subject questions</p>
+        <a href="{% url 'question_banks' %}" class="btn">Open</a>
+    </div>
 
-<div class="card">
-<h3>Exam History</h3>
-<p>Check previous attempts</p>
-<a href="#" class="btn">View</a>
-</div>
+    <!-- Exam History -->
+    <div class="card">
+        <h3>Exam History</h3>
+        <p>Check previous attempts</p>
+        <a href="#" class="btn">View</a>
+    </div>
+
+    <!-- Teacher Consultancy -->
+    <div class="card">
+        <h3>Teacher Consultancy</h3>
+        <p>Chat or sit for teacher exams</p>
+        <a href="{% url 'teacher_consultancy' %}" class="btn">Open</a>
+    </div>
 
 </div>
 

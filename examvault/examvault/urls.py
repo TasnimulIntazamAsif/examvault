@@ -20,6 +20,8 @@ from django.urls import path
 #urlpatterns = [
     #path('admin/', admin.site.urls),
 #]
+from django.conf import settings
+from django.conf.urls.static import static
 
 from django.contrib import admin
 from django.urls import path,include
@@ -29,6 +31,8 @@ from dashboard import views as dash_views
 from students import views as student_views
 from teachers import views as teacher_views
 from dashboard import views as dash_views
+
+
 
 urlpatterns = [
 
@@ -51,6 +55,9 @@ urlpatterns = [
     path('add-question/',teacher_views.add_question,name="add_question"),
     path('exam/', include('exam.urls')),
     path('questionbank/', include('questionbank.urls')),
+    path('teacher/', include('teachers.urls')),
+    path('question-banks/', student_views.question_banks, name="question_banks"),
+    path('students/', include('students.urls')),
 
     #path('start/<int:exam_id>/', views.start_exam, name='start_exam'),
 
@@ -62,7 +69,7 @@ urlpatterns = [
 ]
 
 
-
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 
 
