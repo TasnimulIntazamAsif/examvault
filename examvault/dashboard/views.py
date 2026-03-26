@@ -5,6 +5,11 @@ from students.models import StudentProfile
 from teachers.models import TeacherProfile
 
 
+# 🔥 NEW HOME PAGE
+def home(request):
+    return render(request, 'home.html')
+
+
 # ========================
 # STUDENT DASHBOARD
 # ========================

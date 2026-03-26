@@ -34,6 +34,13 @@ body {
     font-weight: bold;
 }
 
+/* 🔥 LOGO LINK FIX */
+.logo a {
+    color: white;
+    text-decoration: none;
+}
+
+/* 🔥 NAV LINKS */
 .nav-links {
     list-style: none;
     display: flex;
@@ -60,7 +67,7 @@ body {
     padding: 30px;
 }
 
-/* 🔥 BUTTON (GLOBAL) */
+/* 🔥 BUTTON */
 .btn {
     display: inline-block;
     background: #4CAF50;
@@ -74,7 +81,7 @@ body {
     background: #45a049;
 }
 
-/* 🔥 CARD SYSTEM */
+/* 🔥 CARD */
 .card {
     background: white;
     padding: 20px;
@@ -99,14 +106,28 @@ body {
 <nav class="navbar">
 
     <div class="logo">
-        🚀 ExamVault
+        <a href="{% url 'home' %}">🚀 ExamVault</a>
     </div>
 
     <ul class="nav-links">
-        <li><a href="/student/dashboard/">Dashboard</a></li>
-        <li><a href="/exam/">Exams</a></li>
-        <li><a href="/questionbank/">Question Banks</a></li>
-        <li><a href="/logout/">Logout</a></li>
+
+        {% if user.is_authenticated %}
+
+            <!-- ✅ Logged in হলে -->
+            <li><a href="/student/dashboard/">Dashboard</a></li>
+            <li><a href="/exam/">Exams</a></li>
+            <li><a href="/questionbank/">Question Banks</a></li>
+            <li><a href="/logout/">Logout</a></li>
+
+        {% else %}
+
+            <!-- ✅ Logged out হলে -->
+            <li><a href="{% url 'home' %}">Home</a></li>
+            <li><a href="{% url 'login' %}">Login</a></li>
+            <li><a href="{% url 'register' %}">Register</a></li>
+
+        {% endif %}
+
     </ul>
 
 </nav>

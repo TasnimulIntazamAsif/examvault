@@ -1,0 +1,200 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+
+<style>
+
+/* 🔥 HERO LAYOUT */
+.hero {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 50px;
+    padding: 60px 20px;
+}
+
+/* 🔥 LEFT TEXT */
+.hero-text {
+    flex: 0.9;
+}
+
+.hero-text h1 {
+    font-size: 36px;
+    color: #1e293b;
+}
+
+.hero-text h3 {
+    color: #4CAF50;
+    margin: 15px 0;
+}
+
+.description {
+    color: #555;
+    line-height: 1.7;
+    font-size: 15px;
+}
+
+/* 🔥 RIGHT IMAGE */
+.hero-image {
+    flex: 1.2;
+    text-align: center;
+}
+
+/* 🔥 BIG IMAGE FRAME */
+.hero-image img {
+    width: 100%;
+    max-width: 650px;   /* 🔥 BIG SIZE */
+    border-radius: 18px;
+
+    object-fit: cover;
+
+    padding: 8px;
+    background: white;
+
+    box-shadow: 0 20px 40px rgba(0,0,0,0.25);
+
+    transition: 0.3s;
+}
+
+/* 🔥 HOVER EFFECT */
+.hero-image img:hover {
+    transform: scale(1.03);
+}
+
+/* 🔥 BUTTONS */
+.hero-btns {
+    margin-top: 20px;
+}
+
+.btn-main {
+    padding: 12px 20px;
+    margin: 5px;
+    background: linear-gradient(135deg, #4CAF50, #43a047);
+    color: white;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: 0.2s;
+}
+
+.btn-main:hover {
+    transform: scale(1.05);
+}
+
+.btn-outline {
+    background: transparent;
+    border: 2px solid #4CAF50;
+    color: #4CAF50;
+}
+
+/* 🔥 FEATURES */
+.features {
+    margin-top: 60px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    gap: 20px;
+}
+
+.feature-card {
+    background: white;
+    padding: 22px;
+    border-radius: 14px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+    text-align: center;
+    transition: 0.2s;
+}
+
+.feature-card:hover {
+    transform: translateY(-5px);
+}
+
+/* 🔥 RESPONSIVE */
+@media (max-width: 768px) {
+    .hero {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .hero-text {
+        flex: 1;
+    }
+
+    .hero-image {
+        flex: 1;
+    }
+
+    .hero-image img {
+        max-width: 100%;
+    }
+}
+
+</style>
+
+<div class="hero">
+
+    <!-- 🔥 LEFT TEXT -->
+    <div class="hero-text">
+
+        <h1>🚀 Welcome to ExamVault – Smart Online Examination System</h1>
+        <h3>Simplifying Exams, Empowering Education</h3>
+
+        <div class="description">
+
+            <p>
+            ExamVault is a modern and intelligent online examination platform designed to simplify the process of conducting and managing exams. It allows administrators to create customized exams by selecting questions manually or dynamically from question banks.
+            </p>
+
+            <p>
+            Students can take exams seamlessly, answer multiple questions in an interactive interface, and receive instant results with detailed performance analysis.
+            </p>
+
+            <p>
+            With a user-friendly interface, ExamVault makes academic assessments faster, smarter, and more efficient.
+            </p>
+
+        </div>
+
+        <div class="hero-btns">
+            <a href="{% url 'login' %}" class="btn-main">🔐 Login</a>
+            <a href="{% url 'register' %}" class="btn-main btn-outline">📝 Register</a>
+        </div>
+
+    </div>
+
+    <!-- 🔥 RIGHT IMAGE -->
+    <div class="hero-image">
+
+        <!-- ✅ FINAL IMAGE FIX -->
+        <img src="{% static 'images/bg.jpg' %}" alt="ExamVault">
+
+    </div>
+
+</div>
+
+<!-- 🔥 FEATURES -->
+<div class="features">
+
+<div class="feature-card">
+    <h3>📝 Smart Exams</h3>
+    <p>Create and take customizable exams easily</p>
+</div>
+
+<div class="feature-card">
+    <h3>📚 Question Banks</h3>
+    <p>Organize and manage structured question sets</p>
+</div>
+
+<div class="feature-card">
+    <h3>📊 Instant Results</h3>
+    <p>Get real-time performance analytics instantly</p>
+</div>
+
+<div class="feature-card">
+    <h3>👨‍🏫 Teacher Control</h3>
+    <p>Teachers can manage exams and guide students</p>
+</div>
+
+</div>
+
+{% endblock %}
