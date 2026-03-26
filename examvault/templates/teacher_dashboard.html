@@ -2,30 +2,116 @@
 
 {% block content %}
 
-<h1>Teacher Dashboard</h1>
+<style>
 
-<p>Welcome Teacher</p>
+/* 🔥 TITLE */
+h1 {
+    text-align: center;
+    margin-bottom: 10px;
+}
 
-<a href="{% url 'logout' %}">Logout</a> |
-<a href="{% url 'teacher_profile' %}">👤 Edit Profile</a>
+/* 🔥 TOP LINKS */
+.top-links {
+    text-align: center;
+    margin-bottom: 20px;
+}
 
-<hr>
+.top-links a {
+    margin: 0 10px;
+    text-decoration: none;
+    color: #4CAF50;
+    font-weight: bold;
+}
 
-<!-- 🔥 PROFILE SECTION -->
-<h3>My Profile</h3>
+/* 🔥 PROFILE CARD */
+.profile-card {
+    background: white;
+    padding: 20px;
+    width: 320px;
+    margin: auto;
+    border-radius: 14px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.profile-card img {
+    border-radius: 50%;
+    margin-bottom: 10px;
+}
+
+.profile-card p {
+    margin: 6px 0;
+    color: #444;
+}
+
+/* 🔥 GRID */
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 20px;
+}
+
+/* 🔥 CARD */
+.card {
+    background: white;
+    padding: 20px;
+    border-radius: 14px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+    text-align: center;
+    transition: 0.2s;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+}
+
+/* 🔥 BUTTON */
+.btn {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 10px 14px;
+    background: linear-gradient(135deg, #4CAF50, #43a047);
+    color: white;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: 0.2s;
+}
+
+.btn:hover {
+    background: linear-gradient(135deg, #43a047, #2e7d32);
+}
+
+/* 🔥 EMPTY */
+.empty {
+    text-align: center;
+    color: red;
+}
+
+</style>
+
+<h1>👨‍🏫 Teacher Dashboard</h1>
+
+<div class="top-links">
+    <a href="{% url 'logout' %}">Logout</a> |
+    <a href="{% url 'teacher_profile' %}">👤 Edit Profile</a>
+</div>
+
+<!-- 🔥 PROFILE -->
+<h3 style="text-align:center;">My Profile</h3>
 
 {% if profile %}
-    <div style="border:1px solid #ccc; padding:15px; width:300px; border-radius:10px;">
+    <div class="profile-card">
 
         {% if profile.image %}
-            <img src="{{ profile.image.url }}" width="120" style="border-radius:50%;"><br><br>
+            <img src="{{ profile.image.url }}" width="120">
         {% endif %}
 
-        <p><b>Name:</b> {{ profile.full_name }}</p>
-        <p><b>Phone:</b> {{ profile.phone }}</p>
-        <p><b>Institution:</b> {{ profile.institution }}</p>
-        <p><b>Subject:</b> {{ profile.subject }}</p>
-        <p><b>Experience:</b> {{ profile.experience }} years</p>
+        <p><b>{{ profile.full_name }}</b></p>
+        <p>📞 {{ profile.phone }}</p>
+        <p>🏫 {{ profile.institution }}</p>
+        <p>📘 Subject: {{ profile.subject }}</p>
+        <p>⭐ Experience: {{ profile.experience }} years</p>
 
         {% if profile.id_card %}
             <p><a href="{{ profile.id_card.url }}" target="_blank">📄 View ID Card</a></p>
@@ -33,42 +119,41 @@
 
     </div>
 {% else %}
-    <p style="color:red;">No profile added yet</p>
+    <p class="empty">No profile added yet</p>
 {% endif %}
 
-<hr>
+<!-- 🔥 ACTION GRID -->
+<div class="dashboard-grid">
 
-<!-- 🔥 ACTION BUTTONS -->
-<div class="card" style="margin-top:20px;">
+    <div class="card">
+        <h3>➕ Add Question</h3>
+        <p>Create new MCQ questions</p>
+        <a href="{% url 'add_question' %}" class="btn">Open</a>
+    </div>
 
-    <!-- Add Question -->
-    <a href="{% url 'add_question' %}">
-        <button>➕ Add Question</button>
-    </a>
+    <div class="card">
+        <h3>📂 Upload CSV</h3>
+        <p>Bulk upload questions</p>
+        <a href="/questionbank/upload-csv/" class="btn">Upload</a>
+    </div>
 
-    <br><br>
+    <div class="card">
+        <h3>📚 Question Banks</h3>
+        <p>Manage all question banks</p>
+        <a href="/questionbank/" class="btn">View</a>
+    </div>
 
-    <!-- Upload CSV -->
-    <a href="/questionbank/upload-csv/" class="btn">📂 Upload CSV Questions</a>
+    <div class="card">
+        <h3>📝 Create Exam</h3>
+        <p>Create exam from questions</p>
+        <a href="{% url 'create_exam' %}" class="btn">Create</a>
+    </div>
 
-    <br><br>
-
-    <!-- View Question Bank -->
-    <a href="/questionbank/" class="btn">📚 View Question Banks</a>
-
-    <br><br>
-
-    <!-- Create Exam -->
-    <a href="{% url 'create_exam' %}">
-        <button>📝 Create Exam</button>
-    </a>
-
-    <br><br>
-
-    <!-- Manage Exams -->
-    <a href="{% url 'teacher_exam_list' %}">
-        <button>📊 Manage Exams</button>
-    </a>
+    <div class="card">
+        <h3>📊 Manage Exams</h3>
+        <p>View & control exams</p>
+        <a href="{% url 'teacher_exam_list' %}" class="btn">Manage</a>
+    </div>
 
 </div>
 

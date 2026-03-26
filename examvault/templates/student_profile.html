@@ -1,42 +1,132 @@
 {% extends "base.html" %}
 {% block content %}
 
-<h2>Student Profile</h2>
+<style>
+
+/* 🔥 CONTAINER */
+.profile-container {
+    max-width: 600px;
+    margin: auto;
+}
+
+/* 🔥 CARD */
+.profile-card {
+    background: white;
+    padding: 25px;
+    border-radius: 14px;
+    box-shadow: 0 5px 18px rgba(0,0,0,0.08);
+}
+
+/* 🔥 TITLE */
+h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* 🔥 INPUT */
+input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 12px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    transition: 0.2s;
+}
+
+input:focus {
+    border-color: #4CAF50;
+    outline: none;
+}
+
+/* 🔥 IMAGE */
+.profile-img {
+    display: block;
+    margin: auto;
+    border-radius: 50%;
+    margin-bottom: 15px;
+}
+
+/* 🔥 BUTTON */
+button {
+    width: 100%;
+    padding: 12px;
+    background: linear-gradient(135deg, #4CAF50, #43a047);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+button:hover {
+    background: linear-gradient(135deg, #43a047, #2e7d32);
+    transform: scale(1.02);
+}
+
+/* 🔥 LABEL */
+.label {
+    font-weight: bold;
+    margin-bottom: 5px;
+    display: block;
+}
+
+/* 🔥 FILE TEXT */
+.file-text {
+    font-size: 13px;
+    color: #555;
+    margin-bottom: 8px;
+}
+
+</style>
+
+<div class="profile-container">
+
+<h2>👤 Student Profile</h2>
+
+<div class="profile-card">
 
 <form method="POST" enctype="multipart/form-data">
     {% csrf_token %}
 
-    <!-- FULL NAME -->
-    <input type="text" name="name" placeholder="Full Name" value="{{ profile.full_name }}"><br><br>
-
-    <!-- PHONE -->
-    <input type="text" name="phone" placeholder="Phone" value="{{ profile.phone }}"><br><br>
-
-    <!-- INSTITUTION -->
-    <input type="text" name="institution" placeholder="Institution" value="{{ profile.institution }}"><br><br>
-
-    <!-- CLASS -->
-    <input type="text" name="class" placeholder="Class" value="{{ profile.class_name }}"><br><br>
-
-    <!-- DOB -->
-    <input type="date" name="dob" value="{{ profile.date_of_birth|date:'Y-m-d' }}"><br><br>
-
-    <!-- IMAGE PREVIEW -->
+    <!-- IMAGE -->
     {% if profile.image %}
-        <p>Current Image:</p>
-        <img src="{{ profile.image.url }}" width="120"><br><br>
+        <img src="{{ profile.image.url }}" width="120" class="profile-img">
     {% endif %}
 
-    <input type="file" name="image"><br><br>
+    <label class="label">Full Name</label>
+    <input type="text" name="name" value="{{ profile.full_name }}" placeholder="Enter full name">
 
-    <!-- ID CARD -->
+    <label class="label">Phone</label>
+    <input type="text" name="phone" value="{{ profile.phone }}" placeholder="Enter phone number">
+
+    <label class="label">Institution</label>
+    <input type="text" name="institution" value="{{ profile.institution }}" placeholder="Enter institution">
+
+    <label class="label">Class</label>
+    <input type="text" name="class" value="{{ profile.class_name }}" placeholder="Enter class">
+
+    <label class="label">Date of Birth</label>
+    <input type="date" name="dob" value="{{ profile.date_of_birth|date:'Y-m-d' }}">
+
+    <label class="label">Upload Profile Image</label>
+    <input type="file" name="image">
+
     {% if profile.id_card %}
-        <p>Uploaded ID: <a href="{{ profile.id_card.url }}" target="_blank">View</a></p>
+        <p class="file-text">📄 Uploaded ID:
+            <a href="{{ profile.id_card.url }}" target="_blank">View</a>
+        </p>
     {% endif %}
 
-    <input type="file" name="id_card"><br><br>
+    <label class="label">Upload ID Card</label>
+    <input type="file" name="id_card">
 
-    <button type="submit">Save</button>
+    <button type="submit">💾 Save Profile</button>
+
 </form>
+
+</div>
+
+</div>
 
 {% endblock %}

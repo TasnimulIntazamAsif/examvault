@@ -2,22 +2,90 @@
 
 {% block content %}
 
-<h2>Available Exams</h2>
+<style>
+/* 🔥 TITLE */
+h2 {
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+/* 🔥 GRID */
+.exam-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 20px;
+}
+
+/* 🔥 CARD */
+.exam-card {
+    background: white;
+    padding: 20px;
+    border-radius: 14px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+    transition: 0.2s;
+}
+
+.exam-card:hover {
+    transform: translateY(-5px);
+}
+
+/* 🔥 TITLE */
+.exam-card h3 {
+    margin-bottom: 10px;
+}
+
+/* 🔥 INFO */
+.exam-card p {
+    color: #555;
+    margin-bottom: 15px;
+}
+
+/* 🔥 BUTTON */
+.start-btn {
+    width: 100%;
+    padding: 10px;
+    background: linear-gradient(135deg, #4CAF50, #43a047);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.start-btn:hover {
+    background: linear-gradient(135deg, #43a047, #2e7d32);
+    transform: scale(1.03);
+}
+
+/* 🔥 EMPTY */
+.empty {
+    text-align: center;
+    color: gray;
+}
+</style>
+
+<h2>📚 Available Exams</h2>
+
+<div class="exam-grid">
 
 {% for exam in exams %}
 
 <div class="exam-card">
 
     <h3>{{ exam.title }}</h3>
-    <p>Total Questions: {{ exam.total_questions }}</p>
+    <p>📝 Total Questions: {{ exam.total_questions }}</p>
 
-    <!-- 🔥 FINAL WORKING BUTTON -->
     <form action="/exam/start/{{ exam.id }}/" method="GET">
-        <button type="submit" class="start-btn">Start Exam</button>
+        <button type="submit" class="start-btn">🚀 Start Exam</button>
     </form>
 
 </div>
 
+{% empty %}
+    <p class="empty">No exams available</p>
 {% endfor %}
+
+</div>
 
 {% endblock %}

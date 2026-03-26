@@ -2,14 +2,101 @@
 
 {% block content %}
 
-<h2>Teacher Exam Dashboard</h2>
+<style>
 
-<!-- ✅ Create Exam Button -->
-<a href="{% url 'create_exam' %}" style="display:inline-block; margin-bottom:15px;">
-    ➕ Create New Exam
-</a>
+/* 🔥 TITLE */
+h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
 
-<table border="1" cellpadding="10" cellspacing="0" width="100%">
+/* 🔥 TOP ACTION */
+.top-action {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.create-btn {
+    padding: 10px 16px;
+    background: linear-gradient(135deg, #4CAF50, #43a047);
+    color: white;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: 0.2s;
+}
+
+.create-btn:hover {
+    background: linear-gradient(135deg, #43a047, #2e7d32);
+}
+
+/* 🔥 TABLE */
+.table-container {
+    background: white;
+    padding: 20px;
+    border-radius: 14px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+/* 🔥 HEADER */
+th {
+    background: #4CAF50;
+    color: white;
+    padding: 12px;
+}
+
+/* 🔥 ROW */
+td {
+    padding: 10px;
+    text-align: center;
+    border-bottom: 1px solid #eee;
+}
+
+/* 🔥 HOVER */
+tr:hover {
+    background: #f9f9f9;
+}
+
+/* 🔥 ACTION BUTTON */
+.action-btn {
+    padding: 6px 10px;
+    background: #4CAF50;
+    color: white;
+    border-radius: 6px;
+    text-decoration: none;
+    font-size: 13px;
+}
+
+.action-btn:hover {
+    background: #2e7d32;
+}
+
+/* 🔥 EMPTY */
+.empty {
+    text-align: center;
+    padding: 15px;
+    color: gray;
+}
+
+</style>
+
+<h2>📊 Teacher Exam Dashboard</h2>
+
+<div class="top-action">
+    <a href="{% url 'create_exam' %}" class="create-btn">
+        ➕ Create New Exam
+    </a>
+</div>
+
+<div class="table-container">
+
+<table>
+
     <tr>
         <th>Exam Title</th>
         <th>Total Questions</th>
@@ -19,23 +106,25 @@
     {% for exam in exams %}
     <tr>
         <td>{{ exam.title }}</td>
-
-        <!-- ✅ Safe count -->
         <td>{{ exam.questions.count }}</td>
 
         <td>
-            <!-- Preview -->
-            <a href="{% url 'start_exam' exam.id %}">▶ Preview</a>
+            <a href="{% url 'start_exam' exam.id %}" class="action-btn">
+                ▶ Preview
+            </a>
         </td>
     </tr>
 
     {% empty %}
     <tr>
-        <td colspan="3" style="text-align:center;">
+        <td colspan="3" class="empty">
             No exams created yet ❌
         </td>
     </tr>
     {% endfor %}
+
 </table>
+
+</div>
 
 {% endblock %}

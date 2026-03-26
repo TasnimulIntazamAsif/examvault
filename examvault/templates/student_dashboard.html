@@ -2,27 +2,115 @@
 
 {% block content %}
 
-<h2>Student Dashboard</h2>
+<style>
 
-<a href="{% url 'logout' %}">Logout</a> |
-<a href="{% url 'student_profile' %}">👤 Edit Profile</a>
+/* 🔥 TITLE */
+h2 {
+    text-align: center;
+    margin-bottom: 10px;
+}
 
-<hr>
+/* 🔥 TOP BAR */
+.top-links {
+    text-align: center;
+    margin-bottom: 20px;
+}
 
-<!-- 🔥 PROFILE SECTION -->
-<h3>My Profile</h3>
+.top-links a {
+    margin: 0 10px;
+    text-decoration: none;
+    color: #4CAF50;
+    font-weight: bold;
+}
+
+/* 🔥 PROFILE CARD */
+.profile-card {
+    background: white;
+    padding: 20px;
+    width: 300px;
+    margin: auto;
+    border-radius: 14px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.profile-card img {
+    border-radius: 50%;
+    margin-bottom: 10px;
+}
+
+.profile-card p {
+    margin: 6px 0;
+    color: #444;
+}
+
+/* 🔥 GRID */
+.card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 20px;
+}
+
+/* 🔥 DASHBOARD CARD */
+.card {
+    background: white;
+    padding: 20px;
+    border-radius: 14px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+    text-align: center;
+    transition: 0.2s;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+}
+
+/* 🔥 BUTTON */
+.btn {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 10px 14px;
+    background: linear-gradient(135deg, #4CAF50, #43a047);
+    color: white;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: 0.2s;
+}
+
+.btn:hover {
+    background: linear-gradient(135deg, #43a047, #2e7d32);
+}
+
+/* 🔥 EMPTY */
+.empty {
+    text-align: center;
+    color: red;
+}
+
+</style>
+
+<h2>🎓 Student Dashboard</h2>
+
+<div class="top-links">
+    <a href="{% url 'logout' %}">Logout</a> |
+    <a href="{% url 'student_profile' %}">👤 Edit Profile</a>
+</div>
+
+<!-- 🔥 PROFILE -->
+<h3 style="text-align:center;">My Profile</h3>
 
 {% if profile %}
-    <div style="border:1px solid #ccc; padding:15px; width:300px; border-radius:10px;">
+    <div class="profile-card">
 
         {% if profile.image %}
-            <img src="{{ profile.image.url }}" width="120" style="border-radius:50%;"><br><br>
+            <img src="{{ profile.image.url }}" width="120">
         {% endif %}
 
-        <p><b>Name:</b> {{ profile.full_name }}</p>
-        <p><b>Phone:</b> {{ profile.phone }}</p>
-        <p><b>Institution:</b> {{ profile.institution }}</p>
-        <p><b>Class:</b> {{ profile.class_name }}</p>
+        <p><b>{{ profile.full_name }}</b></p>
+        <p>📞 {{ profile.phone }}</p>
+        <p>🏫 {{ profile.institution }}</p>
+        <p>🎓 Class: {{ profile.class_name }}</p>
 
         {% if profile.id_card %}
             <p><a href="{{ profile.id_card.url }}" target="_blank">📄 View ID Card</a></p>
@@ -30,38 +118,32 @@
 
     </div>
 {% else %}
-    <p style="color:red;">No profile added yet</p>
+    <p class="empty">No profile added yet</p>
 {% endif %}
 
-<hr>
-
-<!-- 🔥 MAIN DASHBOARD CARDS -->
+<!-- 🔥 DASHBOARD CARDS -->
 <div class="card-grid">
 
-    <!-- Exams -->
     <div class="card">
-        <h3>Available Exams</h3>
+        <h3>📝 Exams</h3>
         <p>Start your mock tests</p>
         <a href="{% url 'exam_list' %}" class="btn">View Exams</a>
     </div>
 
-    <!-- Question Bank -->
     <div class="card">
-        <h3>Question Banks</h3>
+        <h3>📚 Question Banks</h3>
         <p>Browse subject questions</p>
         <a href="{% url 'question_banks' %}" class="btn">Open</a>
     </div>
 
-    <!-- Exam History -->
     <div class="card">
-        <h3>Exam History</h3>
+        <h3>📊 Exam History</h3>
         <p>Check previous attempts</p>
         <a href="#" class="btn">View</a>
     </div>
 
-    <!-- Teacher Consultancy -->
     <div class="card">
-        <h3>Teacher Consultancy</h3>
+        <h3>👨‍🏫 Consultancy</h3>
         <p>Chat or sit for teacher exams</p>
         <a href="{% url 'teacher_consultancy' %}" class="btn">Open</a>
     </div>

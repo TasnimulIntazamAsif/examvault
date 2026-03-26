@@ -2,16 +2,98 @@
 
 {% block content %}
 
+<style>
+.result-container {
+    max-width: 500px;
+    margin: auto;
+    text-align: center;
+}
+
+/* 🔥 CARD */
+.result-card {
+    background: white;
+    padding: 25px;
+    border-radius: 14px;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+}
+
+/* 🔥 TITLE */
+.result-card h2 {
+    margin-bottom: 15px;
+}
+
+/* 🔥 SCORE */
+.score {
+    font-size: 28px;
+    font-weight: bold;
+    color: #4CAF50;
+    margin: 15px 0;
+}
+
+/* 🔥 STATS */
+.stats {
+    text-align: left;
+    margin-top: 20px;
+}
+
+.stats p {
+    margin: 8px 0;
+    font-size: 15px;
+}
+
+/* 🔥 COLORS */
+.correct {
+    color: #4CAF50;
+    font-weight: bold;
+}
+
+.wrong {
+    color: #e53935;
+    font-weight: bold;
+}
+
+.unanswered {
+    color: #999;
+    font-weight: bold;
+}
+
+/* 🔥 BUTTON */
+.btn {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 10px 16px;
+    background: #4CAF50;
+    color: white;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: 0.2s;
+}
+
+.btn:hover {
+    background: #388e3c;
+}
+</style>
+
+<div class="result-container">
+
 <div class="result-card">
 
-<h2>Exam Result</h2>
+<h2>📊 Exam Result</h2>
 
-<p>Total Questions: {{attempt.total_questions}}</p>
-<p>Correct: {{attempt.correct}}</p>
-<p>Wrong: {{attempt.wrong}}</p>
-<p>Unanswered: {{attempt.unanswered}}</p>
+<div class="score">
+    🎯 Score: {{attempt.score}} / {{attempt.total_questions}}
+</div>
 
-<h3>Your Score: {{attempt.score}}</h3>
+<div class="stats">
+    <p>Total Questions: {{attempt.total_questions}}</p>
+    <p class="correct">✅ Correct: {{attempt.correct}}</p>
+    <p class="wrong">❌ Wrong: {{attempt.wrong}}</p>
+    <p class="unanswered">⚪ Unanswered: {{attempt.unanswered}}</p>
+</div>
+
+<a href="/exam/" class="btn">⬅ Back to Exams</a>
+
+</div>
 
 </div>
 
