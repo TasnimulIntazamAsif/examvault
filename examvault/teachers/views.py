@@ -6,30 +6,51 @@ from .models import TeacherProfile
 
 
 # ========================
-# CREATE EXAM
+# CREATE EXAM (FIXED ✅)
 # ========================
 @login_required
 def create_exam(request):
 
-    questions = Question.objects.all()
+    banks = QuestionBank.objects.all()
+
+    # 👉 selected bank
+    selected_bank_id = request.GET.get('bank')
+
+    # 👉 default empty queryset
+    questions = Question.objects.none()
+
+    # 👉 filter questions
+    if selected_bank_id:
+        questions = Question.objects.filter(bank_id=selected_bank_id)
 
     if request.method == "POST":
         title = request.POST.get("title")
         selected_questions = request.POST.getlist("questions")
 
+        # ❗ safety check
+        if not selected_questions:
+            return render(request, "create_exam.html", {
+                "questions": questions,
+                "banks": banks,
+                "error": "Select at least one question"
+            })
+
+        # ✅ FIXED (removed teacher + is_published)
         exam = Exam.objects.create(
             title=title,
-            teacher=request.user,
             total_questions=len(selected_questions),
-            is_published=True
+            question_bank_id=selected_bank_id if selected_bank_id else None
         )
 
+        # 👉 add selected questions
         exam.questions.set(selected_questions)
 
         return redirect("teacher_exam_list")
 
     return render(request, "create_exam.html", {
-        "questions": questions
+        "questions": questions,
+        "banks": banks,
+        "selected_bank": selected_bank_id
     })
 
 
@@ -62,7 +83,7 @@ def add_question(request):
 
 
 # ========================
-# TEACHER PROFILE (NEW 🔥)
+# TEACHER PROFILE
 # ========================
 @login_required
 def teacher_profile(request):

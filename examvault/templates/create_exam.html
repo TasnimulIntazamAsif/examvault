@@ -2,23 +2,115 @@
 
 {% block content %}
 
+<style>
+.container {
+    max-width: 800px;
+    margin: auto;
+}
+
+.card {
+    background: #ffffff;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    margin-top: 20px;
+}
+
+h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+label {
+    font-weight: bold;
+}
+
+select, input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    margin-top: 8px;
+    margin-bottom: 15px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+}
+
+.question-box {
+    border: 1px solid #e0e0e0;
+    padding: 12px;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    transition: 0.2s;
+}
+
+.question-box:hover {
+    background: #f9f9f9;
+}
+
+button {
+    background: #4CAF50;
+    color: white;
+    padding: 10px 18px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+button:hover {
+    background: #45a049;
+}
+
+.empty-text {
+    color: gray;
+    text-align: center;
+}
+</style>
+
+<div class="container">
+
 <h2>Create Exam</h2>
 
+<!-- 🔥 SELECT BANK -->
+<div class="card">
+<form method="GET">
+    <label>Select Question Bank:</label>
+
+    <select name="bank" onchange="this.form.submit()">
+        <option value="">-- Select Bank --</option>
+
+        {% for b in banks %}
+            <option value="{{ b.id }}">
+                {{ b.title }}
+            </option>
+        {% endfor %}
+    </select>
+</form>
+</div>
+
+<!-- 🔥 EXAM FORM -->
+<div class="card">
 <form method="POST">
     {% csrf_token %}
 
-    <input type="text" name="title" placeholder="Exam Title" required>
+    <label>Exam Title</label>
+    <input type="text" name="title" placeholder="Enter exam title..." required>
 
     <h3>Select Questions</h3>
 
     {% for q in questions %}
-        <div>
+        <div class="question-box">
             <input type="checkbox" name="questions" value="{{ q.id }}">
             {{ q.question_text }}
         </div>
+    {% empty %}
+        <p class="empty-text">Select a question bank first</p>
     {% endfor %}
 
+    <br>
     <button type="submit">Create Exam</button>
 </form>
+</div>
+
+</div>
 
 {% endblock %}
